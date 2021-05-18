@@ -12,12 +12,15 @@
       <label for="nickname">nickname : </label>
       <input type="text" id="nickname" v-model="nickname" />
     </div>
-    <button type="submit">Sign in</button>
+    <button v-bind:disabled="!isValidate || !password" type="submit">
+      Sign in
+    </button>
     <p>{{ logMessage }}</p>
   </form>
 </template>
 
 <script>
+import { validateEmail } from "@/utils/validation";
 import { registerUser } from "@/api/index";
 export default {
   data() {
@@ -27,6 +30,12 @@ export default {
       nickname: "",
       logMessage: "",
     };
+  },
+
+  computed: {
+    isValidate() {
+      return validateEmail(this.username);
+    },
   },
 
   methods: {
