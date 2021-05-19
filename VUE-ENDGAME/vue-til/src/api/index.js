@@ -1,9 +1,16 @@
 import axios from 'axios';
 
-const instance = axios.create({
-    baseURL: process.env.VUE_APP_API_URL,
-})
+import { setInterceptors } from './common/interceptors';
 
+function createInstance() {
+    const instance = axios.create({
+        baseURL: process.env.VUE_APP_API_URL,
+    });
+
+    return setInterceptors(instance);
+}
+
+const instance = createInstance();
 
 function registerUser(userData) {
     // const url = 'http://localhost:3000/signup';

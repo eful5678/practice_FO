@@ -1,19 +1,30 @@
 <template>
-  <div>
-    <form @submit.prevent="submitForm">
-      <div>
-        <label for="username">Id : </label>
-        <input type="text" id="username" v-model="username" />
-      </div>
-      <div>
-        <label for="password">PW : </label>
-        <input type="text" id="password" v-model="password" />
-      </div>
-      <button v-bind:disabled="!isUsernameValid || !password" type="submit">
-        Login
-      </button>
-      <p>{{ logMessage }}</p>
-    </form>
+  <div class="contents">
+    <div class="form-wrapper form-wrapper-sm">
+      <form @submit.prevent="submitForm" class="form">
+        <div>
+          <label for="username">Id : </label>
+          <input type="text" id="username" v-model="username" />
+        </div>
+        <p class="validation-text">
+          <span class="warning" v-if="!isUsernameValid && username">
+            Please enter an email address
+          </span>
+        </p>
+        <div>
+          <label for="password">PW : </label>
+          <input type="password" id="password" v-model="password" />
+        </div>
+        <button
+          v-bind:disabled="!isUsernameValid || !password"
+          type="submit"
+          class="btn"
+        >
+          Login
+        </button>
+        <p class="log">{{ logMessage }}</p>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -44,8 +55,12 @@ export default {
           password: this.password,
         };
         const { data } = await loginUser(userData);
+        console.log(data.token);
+        this.$store.commit("setToken", data.token);
+        this.$store.commit("setUsername", data.user.username);
         console.log("username : " + data.user.username);
         this.logMessage = `${data.user.username} 님 환영합니다.`;
+        this.$router.push("/main");
       } catch (error) {
         // error handling code
 
@@ -65,4 +80,7 @@ export default {
 </script>
 
 <style>
+.btn {
+  color: white;
+}
 </style>

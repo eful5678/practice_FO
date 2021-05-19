@@ -1,22 +1,30 @@
 .<template>
-  <form @submit.prevent="submitForm">
-    <div>
-      <label for="username">id : </label>
-      <input type="text" id="username" v-model="username" />
+  <div class="contents">
+    <div class="form-wrapper form-wrapper-sm">
+      <form @submit.prevent="submitForm" class="form">
+        <div>
+          <label for="username">id : </label>
+          <input type="text" id="username" v-model="username" />
+        </div>
+        <div>
+          <label for="password">pw : </label>
+          <input type="text" id="password" v-model="password" />
+        </div>
+        <div>
+          <label for="nickname">nickname : </label>
+          <input type="text" id="nickname" v-model="nickname" />
+        </div>
+        <button
+          v-bind:disabled="!isValidate || !password"
+          type="submit"
+          class="btn"
+        >
+          Sign in
+        </button>
+        <p class="log">{{ logMessage }}</p>
+      </form>
     </div>
-    <div>
-      <label for="password">pw : </label>
-      <input type="text" id="password" v-model="password" />
-    </div>
-    <div>
-      <label for="nickname">nickname : </label>
-      <input type="text" id="nickname" v-model="nickname" />
-    </div>
-    <button v-bind:disabled="!isValidate || !password" type="submit">
-      Sign in
-    </button>
-    <p>{{ logMessage }}</p>
-  </form>
+  </div>
 </template>
 
 <script>
