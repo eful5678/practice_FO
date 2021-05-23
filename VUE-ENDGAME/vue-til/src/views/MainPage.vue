@@ -24,7 +24,7 @@ export default {
       const { data } = await fetchPosts();
       console.log("post");
       console.log(data.posts);
-      this.postItems = { dd: "asdfa" };
+     
       this.postItems = data.posts;
     },
   },
