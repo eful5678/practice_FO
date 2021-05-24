@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import { loginUser } from "@/api/index";
 import { validateEmail } from "@/utils/validation";
+
 export default {
   data() {
     return {
@@ -54,18 +54,13 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const { data } = await loginUser(userData);
-        console.log(data.token);
-        this.$store.commit("setToken", data.token);
-        this.$store.commit("setUsername", data.user.username);
-        console.log("username : " + data.user.username);
-        this.logMessage = `${data.user.username} 님 환영합니다.`;
+        await this.$store.dispatch("LOGIN", userData);
         this.$router.push("/main");
       } catch (error) {
         // error handling code
 
         console.log(error.response);
-        this.logMessage = `${error.response.data}`;
+        this.logMessage = error.response.data;
       } finally {
         this.initForm();
       }
