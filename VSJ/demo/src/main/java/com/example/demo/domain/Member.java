@@ -18,4 +18,10 @@ public class Member {
     @GeneratedValue
     private Long id;
 
+    private String username;
+
+    private String password;
+
+    private String nickname;
+
 }

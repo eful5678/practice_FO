@@ -1,3 +1,3 @@
-import Login from '@/entity/member';
+import Member from '@/entity/member';
 
-export { Login }
+export { Member }
