@@ -3,8 +3,9 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+
 //라우딩 정보
-export default new VueRouter({
+const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		{
@@ -38,3 +39,11 @@ export default new VueRouter({
 
 	],
 });
+
+router.beforeEach((to, from, next) => {
+	console.log(to);
+	console.log(from);
+	next();
+})
+
+export default router;
